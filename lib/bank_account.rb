@@ -6,22 +6,30 @@ class Account
         
         @balance = 0   
 
-        @transaction = []
+        @transaction = [["date", "credit", "debit", "balance"]]
 
     end 
 
     def deposit(money)
         
         @balance += money  
-        @transaction << [Time.now.strftime("%d/%m/%Y"), money,  nil,  @balance] 
+        @transaction << [Time.now.strftime("%d/%m/%Y"), money,  nil,  @balance]  
+        return @balance
 
-    end 
+    end  
 
     def withdraw(money)
         
         @balance -= money 
-        @transaction << [Time.now.strftime("%d/%m/%Y"),  nil, money, @balance] 
+        @transaction << [Time.now.strftime("%d/%m/%Y"),  nil, money, @balance]  
+        return @balance
 
-    end 
+    end  
+
+    def bank_statment 
+        @transaction.each do |tra|
+            puts tra.join(" || ")
+        end
+    end
  
 end 

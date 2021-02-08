@@ -8,7 +8,7 @@ describe Account do
 
     it 'should return an empty array' do
         account = Account.new 
-        expect(account.transaction).to eq([])
+        expect(account.transaction).to eq([["date", "credit", "debit", "balance"]])
     end
 
     describe 'deposite' do
@@ -21,7 +21,7 @@ describe Account do
         it 'should return a deposite info from transaction' do
             account = Account.new 
             account.deposit(100)
-            expect(account.transaction).to eq([[Time.now.strftime("%d/%m/%Y"), 100, nil, 100]])
+            expect(account.transaction).to eq([["date", "credit", "debit", "balance"], [Time.now.strftime("%d/%m/%Y"), 100, nil, 100]])
         end
     end 
 
@@ -35,13 +35,20 @@ describe Account do
         it 'should withdraw money from the account' do
             account = Account.new 
             account.deposit(100) 
-            expect(account.withdraw(50)).to eq([["08/02/2021", 100, nil, 100], ["08/02/2021", nil, 50, 50]])
+            expect(account.withdraw(50)).to eq(50)
         end 
 
         it 'should return withdraw information on the transation' do
             account = Account.new  
             account.withdraw(100)
-            expect(account.transaction).to eq([[Time.now.strftime("%d/%m/%Y"), nil, 100, -100]])
+            expect(account.transaction).to eq([["date", "credit", "debit", "balance"], [Time.now.strftime("%d/%m/%Y"), nil, 100, -100]])
         end
+    end 
+
+    describe 'bank_statment' do 
+        it 'should return labels for date, credit, debit, balance' do
+            account = Account.new  
+            expect(account.bank_statment).to eq([["date", "credit", "debit", "balance"]]) 
+        end 
     end
 end
