@@ -12,6 +12,12 @@ class Account
         
         @balance += money
 
-    end
+    end 
 
+    def withdraw(money)
+        
+        @balance -= money
+
+    end
+ 
 end
