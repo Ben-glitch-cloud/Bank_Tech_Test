@@ -12,7 +12,8 @@ describe Account do
         expect(account.transaction).to eq([["date", "credit", "debit", "balance"]])
     end
 
-    describe 'deposite' do
+    describe 'deposite' do 
+
         it 'should add money to the bank balance' do
             account.deposit(100) 
             expect(account.balance).to eq(100)
@@ -20,11 +21,13 @@ describe Account do
 
         it 'should return a deposite info from transaction' do
             account.deposit(100)
-            expect(account.transaction).to eq([["date", "credit", "debit", "balance"], [Time.now.strftime("%d/%m/%Y"), 100, nil, 100]])
+            expect(account.transaction).to eq([["date", "credit", "debit", "balance"], [Time.now.strftime("%d/%m/%Y"), 100, nil, 100]]) 
+
         end
     end 
 
-    describe 'withdraw' do
+    describe 'withdraw' do 
+
         it 'should withdraw money from the account into the negitve' do
             account.withdraw(50) 
             expect(account.balance).to eq(-50)
@@ -41,9 +44,17 @@ describe Account do
         end
     end 
 
-    describe 'bank_statment' do 
+    describe 'bank_statment' do  
+        
         it 'should return labels for date, credit, debit, balance' do 
-            expect(account.bank_statment).to eq([["date", "credit", "debit", "balance"]])
-        end 
+            
+        end  
+
+        it 'should return a list of bank statments' do
+            account.deposit(100)
+            account.deposit(200) 
+            account.withdraw(50) 
+            expect(account.bank_statment).to eq([["date", "credit", "debit", "balance"], ["08/02/2021", 100, nil, 100], ["08/02/2021", 200, nil, 300], ["08/02/2021", nil, 50, 250]])
+        end
     end
 end
