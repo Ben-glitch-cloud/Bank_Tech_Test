@@ -6,6 +6,12 @@ class Account
         
         @balance = 0
 
+    end 
+
+    def deposit(money)
+        
+        @balance += money
+
     end
 
 end
