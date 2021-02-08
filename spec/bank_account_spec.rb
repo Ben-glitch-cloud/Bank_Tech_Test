@@ -18,7 +18,12 @@ describe Current_Account do
 
     let(:current_account) { Current_Account.new } 
 
-    describe 'deposit' do 
+    describe 'deposit' do  
+
+        it 'should deposit £100' do 
+            expect(current_account.deposit(100)).to eq(100)
+        end  
+
         it 'should deposit £100 in to the current account' do  
             current_account.deposit(100)
             expect(current_account.balance).to eq(100)  
@@ -26,7 +31,12 @@ describe Current_Account do
         end  
     end  
 
-    describe 'withdraw' do 
+    describe 'withdraw' do  
+
+        it 'should withdraw money from the count' do 
+            expect(current_account.withdraw(-50)).to eq(50)
+        end 
+
         it 'should withdraw £50 from the count' do 
             current_account.withdraw(50) 
             expect(current_account.balance).to eq(-50) 
