@@ -1,4 +1,4 @@
-class Account 
+class Bank_Account 
 
     attr_accessor :balance, :transaction
     
@@ -7,6 +7,15 @@ class Account
         @balance = 0   
 
         @transaction = [["date", "credit", "debit", "balance"]]
+
+    end  
+end    
+ 
+class Current_Account < Bank_Account   
+
+    def initialize  
+
+        super 
 
     end 
 
@@ -24,12 +33,22 @@ class Account
         @transaction << [Time.now.strftime("%d/%m/%Y"),  nil, money, @balance]  
         return @balance
 
-    end  
+    end   
+end    
+
+class Statment < Current_Account 
+
+    def initialize 
+
+        super
+
+    end 
 
     def bank_statment 
         @transaction.each do |tra|
             puts tra.join(" || ")
         end
-    end
- 
+    end 
 end 
+
+

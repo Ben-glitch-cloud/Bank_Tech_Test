@@ -1,60 +1,53 @@
 require 'bank_account' 
 
-describe Account do 
+describe Bank_Account do   
 
-    let( :account ) { Account.new }
+    let(:bank_account) { Bank_Account.new }
 
-    it 'should return a bank balance of around 0' do 
-        expect(account.balance).to eq(0)
+    it 'should return a balance' do 
+        expect(bank_account.balance).to eq(0)
+    end   
+
+    it 'should return a date, criedit, debit, balance' do 
+        expect(bank_account.transaction).to eq([["date", "credit", "debit", "balance"]])
+    end 
+
+end  
+
+describe Current_Account do 
+
+    let(:current_account) { Current_Account.new } 
+
+    describe 'deposit' do 
+        it 'should deposit £100 in to the current account' do  
+            current_account.deposit(100)
+            expect(current_account.balance).to eq(100)  
+            expect(current_account.transaction).to eq([["date", "credit", "debit", "balance"], ["08/02/2021", 100, nil, 100]])
+        end  
     end  
 
-    it 'should return an empty array' do
-        expect(account.transaction).to eq([["date", "credit", "debit", "balance"]])
-    end
-
-    describe 'deposite' do 
-
-        it 'should add money to the bank balance' do
-            account.deposit(100) 
-            expect(account.balance).to eq(100)
-        end 
-
-        it 'should return a deposite info from transaction' do
-            account.deposit(100)
-            expect(account.transaction).to eq([["date", "credit", "debit", "balance"], [Time.now.strftime("%d/%m/%Y"), 100, nil, 100]]) 
-
-        end
-    end 
-
     describe 'withdraw' do 
-
-        it 'should withdraw money from the account into the negitve' do
-            account.withdraw(50) 
-            expect(account.balance).to eq(-50)
+        it 'should withdraw £50 from the count' do 
+            current_account.withdraw(50) 
+            expect(current_account.balance).to eq(-50) 
+            expect(current_account.transaction).to eq([["date", "credit", "debit", "balance"], ["08/02/2021", nil, 50, -50]])
         end 
-
-        it 'should withdraw money from the account' do
-            account.deposit(100) 
-            expect(account.withdraw(50)).to eq(50)
-        end 
-
-        it 'should return withdraw information on the transation' do
-            account.withdraw(100)
-            expect(account.transaction).to eq([["date", "credit", "debit", "balance"], [Time.now.strftime("%d/%m/%Y"), nil, 100, -100]])
-        end
     end 
+end  
 
-    describe 'bank_statment' do  
-        
-        it 'should return labels for date, credit, debit, balance' do 
-            
+describe 'Statment' do 
+
+    let(:statment) { Statment.new }
+
+    describe 'bank_statment' do 
+        it 'should return a bank statment' do 
+            expect(statment.bank_statment).to eq([["date", "credit", "debit", "balance"]])
         end  
 
-        it 'should return a list of bank statments' do
-            account.deposit(100)
-            account.deposit(200) 
-            account.withdraw(50) 
-            expect(account.bank_statment).to eq([["date", "credit", "debit", "balance"], ["08/02/2021", 100, nil, 100], ["08/02/2021", 200, nil, 300], ["08/02/2021", nil, 50, 250]])
-        end
-    end
-end
+        it 'should return a bank statment' do 
+            statment.deposit(100) 
+            statment.deposit(200) 
+            expect(statment.bank_statment).to eq([["date", "credit", "debit", "balance"], [Time.now.strftime("%d/%m/%Y"), 100, nil, 100], [Time.now.strftime("%d/%m/%Y"), 200, nil, 300]])
+        end 
+    end  
+end 
