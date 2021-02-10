@@ -1,6 +1,19 @@
-# Bank_Tech_Test
+# Bank_Tech_Test 
+
+    This repo replicate's the funaction of a customer using a bank branch. You are able to deposit and withdraw money at any time. And print out a history of your bank transactions. 
+
+### How to use  
+
+    - Fork and clone the repo  
+    - Install bundle to download rspec 
+    - Copy the code from the lib file into irb  
+    - And begin trying it out
+
+### 
 
 ## Acceptance criteria 
+
+### outcome
 
 ```
 Given a client makes a deposit of 1000 on 10-01-2012
