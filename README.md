@@ -2,15 +2,29 @@
 
     This repo replicate's the funaction of a customer using a bank branch. You are able to deposit and withdraw money at any time. And print out a history of your bank transactions. 
 
-### How to use  
+### Set up
 
     - Fork and clone the repo  
     - Install bundle to download rspec 
     - Copy the code from the lib file into irb  
     - And begin trying it out
 
-### 
+### How to use 
 
+    Ones you have Set up the repo and started up irb  
+
+    ```
+    curent_account = current_account.new  
+
+    current_account.balance <-- will show the balance 
+
+    current_account.deposit(value)  <-- will add money to the account 
+
+    current_account.withdraw(value) <-- will take money out of the account 
+
+    current_account.current_account_history <-- will show the history of tranaction 
+
+    ```
 ## Acceptance criteria 
 
 ### outcome
