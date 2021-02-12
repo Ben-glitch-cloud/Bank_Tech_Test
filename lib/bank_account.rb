@@ -1,24 +1,13 @@
-class Bank_Account  
-
-    attr_accessor :balance, :transaction
-
-    def initialize 
-
-        @balance = 0 
-
-        @transaction = [] 
-
-    end 
-    
-end    
- 
-class Current_Account < Bank_Account     
+  
+class CurrentAccount     
 
     attr_accessor :balance, :transaction
     
     def initialize
 
-        super   
+        @balance = 0 
+
+        @transaction = [] 
 
     end  
 
@@ -36,20 +25,28 @@ class Current_Account < Bank_Account
             return "--Insufficient Funds--"
         else 
             @balance -= money 
-            @transaction << [Time.now.strftime("%d/%m/%Y"),  nil, money, @balance]  
-        end 
-    end   
-    
-    def current_account_history 
+            @transaction << [Time.now.strftime("%d/%m/%Y"),  nil, money, @balance]   
+            return @balance
+        end  
 
-        puts ["date", "credit", "debit", "balance"].join(" || ")
-        @transaction.each do |tra| 
-            puts tra.join(" || ")
-        end 
+    end    
 
-    end
+    def print_statments
+
+        AccountHistory.new.print_account_statment(@transaction) 
+
+    end 
     
 end     
+
+class AccountHistory
+
+    def print_account_statment(transactions)
+        puts ["date", "credit", "debit", "balance"].join(" || ")
+        transactions.each { |tra| puts tra.join(" || ") }
+    end  
+
+end 
 
 
 
